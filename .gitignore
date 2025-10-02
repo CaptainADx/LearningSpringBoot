@@ -1,0 +1,16 @@
+# STS/Eclipse workspace files
+.metadata/
+bin/
+.settings/
+.project
+.classpath
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
