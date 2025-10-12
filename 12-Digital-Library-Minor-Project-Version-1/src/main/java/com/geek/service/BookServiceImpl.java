@@ -1,10 +1,12 @@
 package com.geek.service;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,8 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Book searchByBookId(int bookId) {
-		return null;
+		Book book = bookRepo.findById(bookId).orElseThrow(() -> new ApplicationException("Book ID is not Found"));
+		return book;
 	}
 
 	@Override
@@ -80,7 +83,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Page<Book> allBookswithPagination(int pageNo, int size) {
-		return null;
+//		Pageable pageable = PageRequest.of(pageNo, size);
+		
+		//
+		Pageable pageable = PageRequest.of(pageNo, size, Sort.by("bookName"));
+		
+		return bookRepo.findAll(pageable);
 	}
 
 	@Override
@@ -90,7 +98,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> searchByGenre(Genre genre) {
-		return null;
+		return bookRepo.findByGenre(genre);
 	}
 
 	@Override
@@ -100,7 +108,8 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> searchByBookName(String bookName) {
-		return null;
+		return bookRepo.findByBookName(bookName);
+		
 	}
 
 	@Override
