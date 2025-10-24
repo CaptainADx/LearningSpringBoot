@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.geek.entity.User;
 import com.geek.service.UserService;
 
 @Service
@@ -17,7 +18,7 @@ public class MyUserDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		com.geek.entity.User user = service.getUserByUserName(username);
+		User user = service.getUserByUserName(username);
 		
 		if(user == null) {
 			throw new UsernameNotFoundException("User not found: " + username);
@@ -26,7 +27,7 @@ public class MyUserDetailService implements UserDetailsService{
 		return org.springframework.security.core.userdetails.User.builder()
 	                .username(user.getUserName())
 	                .password(user.getPassword()) // encoded password
-	                .roles(user.getRole().replace("ROLE_", "")) // Spring Security adds ROLE_ automatically
+	                .roles(user.getRole().replace("ROLE_", "")) // Spring Security removes ROLE_ automatically
 	                .build();
 	}
 

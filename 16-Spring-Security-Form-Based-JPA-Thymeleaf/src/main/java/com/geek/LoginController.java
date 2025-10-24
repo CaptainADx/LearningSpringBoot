@@ -1,7 +1,10 @@
 package com.geek;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +28,21 @@ public class LoginController {
 		return "other";
 	}
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@GetMapping("/admin")
+	public String adminPage(Principal p) {
+		System.out.println(p.getName());
+		return "admin";
+	}
+	
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')") 
+	@GetMapping("/user")
+	public String userPage(Principal p) {
+		System.out.println(p.getName());
+		return "user";
+	}
+	
+	
 	@GetMapping("/home")
 	public String homePage() {
 		return "home";
@@ -44,9 +62,5 @@ public class LoginController {
 		
 		return ResponseEntity.ok("User Registration Successful !");
 	}
-	
-	
-	
-	
 	
 }
