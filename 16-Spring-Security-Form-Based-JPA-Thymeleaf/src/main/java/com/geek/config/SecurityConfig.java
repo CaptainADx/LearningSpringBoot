@@ -49,8 +49,8 @@ public class SecurityConfig {
 		http.
 			csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/login", "/register", "/css/**", "/js/**")
-					.permitAll()
+					.requestMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
+					.requestMatchers("/error").authenticated()
 					.anyRequest()
 					.authenticated()
 					)
@@ -64,6 +64,10 @@ public class SecurityConfig {
 			.logout(logout -> logout
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/login?logout=true")
+					)
+			.exceptionHandling( exception -> exception
+					.accessDeniedPage("/error")
+					
 					);
 		
 		return http.build();

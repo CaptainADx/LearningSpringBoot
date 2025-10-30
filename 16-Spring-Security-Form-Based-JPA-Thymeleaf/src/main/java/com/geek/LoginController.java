@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,15 +31,17 @@ public class LoginController {
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/admin")
-	public String adminPage(Principal p) {
+	public String adminPage(Principal p, Model model) {
 		System.out.println(p.getName());
+		model.addAttribute("user", p.getName());
 		return "admin";
 	}
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')") 
 	@GetMapping("/user")
-	public String userPage(Principal p) {
+	public String userPage(Principal p, Model model) {
 		System.out.println(p.getName());
+		model.addAttribute("user", p.getName());
 		return "user";
 	}
 	
