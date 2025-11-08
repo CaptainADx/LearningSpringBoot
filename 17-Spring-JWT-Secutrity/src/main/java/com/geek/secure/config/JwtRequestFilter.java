@@ -1,12 +1,12 @@
 package com.geek.secure.config;
 
 import java.io.IOException;
-/*
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-*/
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +19,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.geek.secure.service.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 @CrossOrigin
@@ -35,13 +31,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws ServletException, IOException {
-System.out.println("do Filter ......");
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+		
+		System.out.println("do Filter ......");
 		final String requestTokenHeader = request.getHeader("Authorization");
-System.out.println("Token from client : "+requestTokenHeader);
+		System.out.println("Token from client : "+requestTokenHeader);
+		
 		String username = null;
 		String jwtToken = null;
+		
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);
@@ -49,6 +47,7 @@ System.out.println("Token from client : "+requestTokenHeader);
 				//to get the uname from the token
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 				System.out.println("username : "+username);
+				
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
