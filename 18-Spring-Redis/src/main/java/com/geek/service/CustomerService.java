@@ -3,6 +3,7 @@ package com.geek.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepo;
 	
+	@CachePut(value="customer", key="#root.args[0].customerId")
 	public Customer addNewCustomer(Customer customer) {
 		return customerRepo.save(customer);
 	}
