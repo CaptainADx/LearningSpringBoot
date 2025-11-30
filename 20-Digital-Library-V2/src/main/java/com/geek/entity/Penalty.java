@@ -1,0 +1,17 @@
+package com.geek.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Entity(name= "Penalty")
+@Data
+public class Penalty {
+	@Id 
+	@GeneratedValue
+	private int penaltyId;
+	private int noOfDaysDiff;
+	private float amount;
+	private String description;
+}

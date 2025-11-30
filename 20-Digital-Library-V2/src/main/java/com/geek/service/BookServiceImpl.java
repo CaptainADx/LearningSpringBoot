@@ -44,7 +44,7 @@ public class BookServiceImpl implements BookService {
 		Book book = bookRepo.findById(bookId).orElseThrow(() -> new ApplicationException("Book ID is not Found"));
 		return book;
 	}
-	
+
 	@Override
 	public Book addBook(BookDto bookDto) {
 		int authorId = bookDto.getAuthorId();
@@ -81,9 +81,6 @@ public class BookServiceImpl implements BookService {
 		return bookRepo.findAll();
 	}
 
-	
-	
-	
 	@Override
 	public Page<Book> allBookswithPagination(int pageNo, int size) {
 //		Pageable pageable = PageRequest.of(pageNo, size);
@@ -93,9 +90,6 @@ public class BookServiceImpl implements BookService {
 		
 		return bookRepo.findAll(pageable);
 	}
-	
-	
-	
 
 	@Override
 	public List<Book> searchByAuthor(int authorId) {
