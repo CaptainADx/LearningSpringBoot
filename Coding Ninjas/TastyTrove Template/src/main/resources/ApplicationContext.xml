@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Ingredient Beans -->
+
+    <bean id="lentils" class="com.example.TastyTrove.Lentils"/>
+
+    <bean id="rice" class="com.example.TastyTrove.Rice"/>
+
+    <bean id="wheat" class="com.example.TastyTrove.Wheat"/>
+
+
+    <!-- North Indian Recipes -->
+
+    <bean id="northIndianLentils"
+          class="com.example.TastyTrove.NorthIndian">
+        <property name="ingredients" ref="lentils"/>
+    </bean>
+
+    <bean id="northIndianRice"
+          class="com.example.TastyTrove.NorthIndian">
+        <property name="ingredients" ref="rice"/>
+    </bean>
+
+    <bean id="northIndianWheat"
+          class="com.example.TastyTrove.NorthIndian">
+        <property name="ingredients" ref="wheat"/>
+    </bean>
+
+
+    <!-- South Indian Recipes -->
+
+    <bean id="southIndianLentils"
+          class="com.example.TastyTrove.SouthIndian">
+        <property name="ingredients" ref="lentils"/>
+    </bean>
+
+    <bean id="southIndianRice"
+          class="com.example.TastyTrove.SouthIndian">
+        <property name="ingredients" ref="rice"/>
+    </bean>
+
+    <bean id="southIndianWheat"
+          class="com.example.TastyTrove.SouthIndian">
+        <property name="ingredients" ref="wheat"/>
+    </bean>
+
+
+    <!-- Chinese Recipes -->
+
+    <bean id="chineseLentils"
+          class="com.example.TastyTrove.Chinese">
+        <property name="ingredients" ref="lentils"/>
+    </bean>
+
+    <bean id="chineseRice"
+          class="com.example.TastyTrove.Chinese">
+        <property name="ingredients" ref="rice"/>
+    </bean>
+
+    <bean id="chineseWheat"
+          class="com.example.TastyTrove.Chinese">
+        <property name="ingredients" ref="wheat"/>
+    </bean>
+
+</beans>
