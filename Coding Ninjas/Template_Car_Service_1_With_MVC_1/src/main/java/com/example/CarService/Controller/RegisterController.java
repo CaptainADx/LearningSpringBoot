@@ -27,11 +27,6 @@ public class RegisterController {
     }
 
     
-    /** 
-      1. You need to modify the logic for getResponsePage method, as registerCar return type is changed.
-      2. If registerCar method returns -1 then getResponsePage method should return string "carregister" for 
-        car register page. 
-     **/
     @RequestMapping("/done")
     public ModelAndView getResponsePage(@ModelAttribute("Vehicle") Car car){
     	int id = registration.registerCar(car.getRegisterationNumber(),car.getCarName(),car.getCarDetails(), car.getCarWork());
