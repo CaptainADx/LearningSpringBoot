@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService{
 				
 				penaltyRepo.save(penalty);
 				
+				t.setPenalty(penalty);
 				t.setReturnedDate(currentDate);
 				t.setTransactionType(TransactionType.RETURN);
 				t.setAmount(b.getCost());

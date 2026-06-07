@@ -2,6 +2,8 @@ package com.geek.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -12,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.repository.core.support.TransactionalRepositoryFactoryBeanSupport;
 
 import com.geek.entity.Author;
 import com.geek.entity.Book;
@@ -73,9 +74,55 @@ public class UserServiceImplTest {
 		
 		assertEquals(TransactionType.RETURN, mockTransaction.getTransactionType());
 		
-		
-		
+		verify(transactRepo, times(1)).findById(991);
+		verify(bookRepo, times(1)).findById(1);
+			
 	}
+	
+	@Test
+	public void testReturnBookWithPenalty() {
+		
+		//<-----------WORKING ON THIS SECTION--------------->
+		//<-----------WORKING ON THIS SECTION--------------->
+		//<-----------WORKING ON THIS SECTION--------------->
+		//<-----------WORKING ON THIS SECTION--------------->
+		
+		Book mockBook = new Book();
+		mockBook.setBookId(1);
+		mockBook.setBookName("System Designing");
+		mockBook.setTitle("Technology");
+		mockBook.setCost(100);
+		mockBook.setPublishedDate(LocalDate.of(2025,6,1));
+		mockBook.setStock(20);
+		mockBook.setGenre(Genre.COMPUTERS);
+		mockBook.setAuthor(new Author());
+		
+		
+		
+		Transaction mockTransaction = new Transaction();
+		mockTransaction.setTransactionId(991);
+		mockTransaction.setTransactionType(TransactionType.BORROW);
+		mockTransaction.setBorrowedDate(LocalDate.of(2025,10,5));
+		mockTransaction.setReturnedDate(LocalDate.of(2025, 11, 30));
+		mockTransaction.setBook(mockBook);
+		
+		when(transactRepo.findById(991)).thenReturn(Optional.of(mockTransaction));
+		when(bookRepo.findById(1)).thenReturn(Optional.of(mockBook));
+		
+		userService.returnBook(991);
+		
+		assertEquals(TransactionType.RETURN, mockTransaction.getTransactionType());
+		
+		verify(transactRepo, times(1)).findById(991);
+		verify(bookRepo, times(1)).findById(1);
+		
+		Penalty p = mockTransaction.getPenalty();
+//		System.out.println(p.getDescription());
+		assertEquals("Return delayed by : " + 64 + "Days" + "\n" + 
+										"Penalty Charges is : " + 640.0 + "/- only", p.getDescription());
+		
+			
+	}   
 	
 	
 }

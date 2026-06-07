@@ -53,6 +53,8 @@ class BookServiceImplTest {
 		ApplicationException ex = assertThrows(ApplicationException.class, () -> bookService.searchByBookId(2));
 		
 		assertEquals(ex.getMessage(), "Book ID is not Found");
+		
+		verify(bookRepository, times(1)).findById(2);
 	}
 	
 	
