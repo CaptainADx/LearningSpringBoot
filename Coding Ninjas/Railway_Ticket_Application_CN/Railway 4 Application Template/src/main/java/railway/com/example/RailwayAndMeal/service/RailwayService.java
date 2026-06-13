@@ -45,7 +45,7 @@ public class RailwayService {
 
 	public void updateTicket(Ticket ticket) {
 		Ticket existing_ticket = this.getTicketByPnr(ticket.getPnr());
-	long pnr=ticket.getPnr();
+		long pnr=ticket.getPnr();
 		list.remove(existing_ticket);
 		ticketMap.remove(existing_ticket.getPnr());
 		list.add(ticket);
