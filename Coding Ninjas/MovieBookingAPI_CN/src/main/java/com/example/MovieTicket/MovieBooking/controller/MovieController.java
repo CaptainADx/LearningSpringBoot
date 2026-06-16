@@ -58,7 +58,7 @@ public class MovieController {
 	@DeleteMapping("/movie/{id}")
 	public void deleteMovieById(@PathVariable String id) {
 		
-		movieService.deleteMovieById(id);
+		movieService.deleteMovie(id);
 		
 	}
 	
