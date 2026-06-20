@@ -4,10 +4,9 @@ import java.util.List;
 
 public interface Ingredients {
 
-    public void setIngredients(String ingredient);
+    void setIngredient(String ingredient);
 
     String getDishDetail();
 
     List<String> getIngredientsDetail();
-    
 }

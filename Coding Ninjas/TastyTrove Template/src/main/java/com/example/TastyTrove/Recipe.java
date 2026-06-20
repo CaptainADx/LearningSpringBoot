@@ -5,7 +5,5 @@ public interface Recipe {
     void getDetails();
 
     void setUserName(String userName);
-    
-
-    void setIngredients(String ingredient);
+    void setIngredients(String ingredients);
 }

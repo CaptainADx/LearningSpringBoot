@@ -24,4 +24,16 @@ public class ItemService {
 	public void addItem(Item item) {
 		itemDal.addItem(item);
 	}
+	
+	@Transactional
+	public void deleteById(long id) {
+		itemDal.deleteById(id);
+		
+	}
+
+	@Transactional
+	public void updateItem(Item item) {
+		itemDal.updateItem(item);
+		
+	}
 }

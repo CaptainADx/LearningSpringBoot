@@ -2,19 +2,23 @@ package com.example.TastyTrove;
 
 import com.example.TastyTrove.Ingredients;
 import com.example.TastyTrove.Recipe;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 @Component("southIndian")
 public class SouthIndian implements Recipe {
     private String name ="SouthIndian";
     private String userName;
+    
+    @Autowired
+    @Qualifier("lentils")
     private Ingredients ingredients;
 
-    @Override
-    public void setIngredients(String ingredients) {
-        this.ingredients.setIngredients(ingredients);
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class SouthIndian implements Recipe {
 
     @Override
     public void getDetails() {
+        this.ingredients.setIngredient(name);
         String dishName = this.ingredients.getDishDetail();
         List<String> ingredients = this.ingredients.getIngredientsDetail();
         System.out.println("Hello user " + this.userName + " we suggest you to make " + dishName + " you can use the following ingredients:");
@@ -32,4 +37,10 @@ public class SouthIndian implements Recipe {
             System.out.println(i + 1 + ". " + ingredients.get(i));
         }
     }
+
+	@Override
+	public void setIngredients(String ingredients) {
+		this.ingredients.setIngredient(ingredients);
+		
+	}
 }

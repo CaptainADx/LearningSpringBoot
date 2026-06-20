@@ -3,6 +3,7 @@ package com.example.TastyTrove;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component("rice")
@@ -20,12 +21,9 @@ public class Rice implements Ingredients {
         Collections.addAll(northIndianRiceRecipes, "Cooking Oil", "Rice", "Onions", "Tomatoes", "salt");
         Collections.addAll(southIndianRiceRecipes, "Rice", "Salt", "Black Gram");
     }
-    
-    
-
 
     @Override
-    public void setIngredients(String ingredient) {
+    public void setIngredient(String ingredient) {
         if(ingredient.equals("Chinese")) this.isChinese = true;
         if(ingredient.equals("NorthIndian")) this.isNorthIndian = true;
         if(ingredient.equals("SouthIndian")) this.isSouthIndian = true;
