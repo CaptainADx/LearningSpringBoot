@@ -1,10 +1,12 @@
 package com.cn.cnkart.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +23,9 @@ public class Item {
 
 	@Column
 	private String description;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	private ItemDetails itemDetails;
 	
 	public Item() {
 		
@@ -52,6 +57,15 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public ItemDetails getItemDetails() {
+		return itemDetails;
+	}
+
+	public void setItemDetails(ItemDetails itemDetails) {
+		this.itemDetails = itemDetails;
+	}
+	
 	
 	
 	

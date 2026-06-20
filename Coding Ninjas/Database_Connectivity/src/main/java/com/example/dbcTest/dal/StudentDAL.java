@@ -16,7 +16,7 @@ public class StudentDAL {
 	
 	public void save(Student student) {
 		Session session = entityManager.unwrap(Session.class);
-		session.persist(student);
+		session.persist(student); 
 	}
 	
 	
