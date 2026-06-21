@@ -1,5 +1,7 @@
 package com.cn.cnkart.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +30,9 @@ public class ItemDetails {
 	private String category;
 	
 	@OneToOne(mappedBy="itemDetails", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private Item item;
+	
 	
 	public ItemDetails() {
 		
@@ -67,6 +71,14 @@ public class ItemDetails {
 
 	public int getId() {
 		return id;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 	
 	
