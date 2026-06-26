@@ -16,16 +16,10 @@ public class ItemDALImpl implements ItemDAL {
 	@Autowired
 	EntityManager entityManager;
 	
-	Session session;
-	
-	@PostConstruct
-	public void init() {
-		session = entityManager.unwrap(Session.class);
-	}
-	
+
 	@Override
 	public Item getById(long id) {
-		
+		Session session = entityManager.unwrap(Session.class);
 		Item item = session.get(Item.class, id);
 		return item;
 		
@@ -33,7 +27,8 @@ public class ItemDALImpl implements ItemDAL {
 
 	@Override
 	public void addItem(Item item) {
-		
+		Session session = entityManager.unwrap(Session.class);
+
 		session.persist(item);
 		
 	}
@@ -41,7 +36,7 @@ public class ItemDALImpl implements ItemDAL {
 	@Override
 	public void deleteById(long id) {
 		Session session = entityManager.unwrap(Session.class);
-		Item item = getById(id);
+		Item item = session.get(Item.class, id);
 		
 		session.remove(item);
 		

@@ -2,6 +2,8 @@ package com.cn.cnkart.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -39,6 +42,10 @@ public class Item {
 //	@JoinColumn(name="item_id") //This will add extra column to "Item_Review" Table with name "item_id" to represent the corresponding item for that particular review in the row.
 	private List<ItemReview> itemReview;
 	
+	@ManyToMany(mappedBy="items")
+	@JsonIgnore //we can simple use this Instead of using JsonManagedReference and JsonBackReference... Put it in Child-Side
+	private List<Order> orders;
+	
 	public Item() {
 		
 	}
@@ -47,6 +54,18 @@ public class Item {
 		super();
 		this.name = name;
 		this.description = description;
+	}
+	
+	
+
+	public Item(String name, String description, ItemDetails itemDetails, List<ItemReview> itemReview,
+			List<Order> orders) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.itemDetails = itemDetails;
+		this.itemReview = itemReview;
+		this.orders = orders;
 	}
 
 	public long getId() {
@@ -84,6 +103,14 @@ public class Item {
 
 	public void setItemReview(List<ItemReview> itemReview) {
 		this.itemReview = itemReview;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 	
 	
