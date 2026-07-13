@@ -44,6 +44,7 @@ public class MainController {
 	@GetMapping("/customers")
 	public List<Customer> getAllCustomers() {
 		return service.getAllCustomers();
+		
 	}
 
 	@GetMapping("/customers/restaurant/{restaurantName}")

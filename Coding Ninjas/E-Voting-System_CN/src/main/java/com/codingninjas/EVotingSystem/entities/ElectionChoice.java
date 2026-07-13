@@ -1,9 +1,14 @@
 package com.codingninjas.EVotingSystem.entities;
 
 import jakarta.persistence.*;
-import org.springframework.data.repository.cdi.Eager;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
+@Table(name="election_choice")
 public class ElectionChoice {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -12,8 +17,13 @@ public class ElectionChoice {
 	private String name;
 
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name ="election_id")
 	private Election election;
-
+	
+	@OneToMany(mappedBy = "electionChoice")
+	@JsonIgnore
+	List<Vote> votes;
+	
 	public long getId() {
 		return id;
 	}
@@ -37,4 +47,14 @@ public class ElectionChoice {
 	public void setElection(Election election) {
 		this.election = election;
 	}
+
+	public List<Vote> getVotes() {
+		return votes;
+	}
+
+	public void setVotes(List<Vote> votes) {
+		this.votes = votes;
+	}
+	
+	
 }

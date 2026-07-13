@@ -1,17 +1,31 @@
 package com.codingninjas.EVotingSystem.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
 
 @Entity
+@Table(name= "votes")
 public class Vote {
 
 	// declare the attributes here
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	long id;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "election_id")
+	Election election;
+	
+	@ManyToOne
+	@JoinColumn(name = "election_choice_id")
+	ElectionChoice electionChoice;
 
 	public long getId() {
 		return id;
@@ -44,5 +58,7 @@ public class Vote {
 	public void setElectionChoice(ElectionChoice electionChoice) {
 		this.electionChoice = electionChoice;
 	}
+	
+	
 
 }
