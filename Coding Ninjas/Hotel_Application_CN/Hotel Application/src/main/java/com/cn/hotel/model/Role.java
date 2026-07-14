@@ -2,15 +2,12 @@ package com.cn.hotel.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Table(name="role")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -25,6 +22,5 @@ public class Role {
 	String roleName;
 	
 	@ManyToMany(mappedBy = "roles")
-	@JsonIgnore
 	Set<User> users;
 }

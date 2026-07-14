@@ -5,12 +5,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-import com.cn.hotel.model.User;
 import com.cn.hotel.repository.UserRepository;
 
-@Service
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	private final UserRepository userRepo; 
@@ -23,15 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		System.out.println("Loading user: " + username);
-
-	    User user = userRepo.findByUsername(username)
-	            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-	    System.out.println(user);
-
-	    return user;
-	
+		return this.userRepo.findByUserName(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 	}
 	
 	

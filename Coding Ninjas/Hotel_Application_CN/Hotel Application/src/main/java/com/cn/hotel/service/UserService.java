@@ -28,8 +28,7 @@ public class UserService {
 		
 		user.setUsername(userRequest.getUsername());
 		user.setPassword(encodedPassword);
-		
-		userRepo.save(user);
+	
 	}
 	
 	

@@ -29,10 +29,8 @@ public class HotelSecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(request -> request
-					.requestMatchers("/user/register","/login")
+					.requestMatchers("user/register")
 					.permitAll()
-					.anyRequest()
-					.authenticated()
 			)
 			.rememberMe(remember -> remember.userDetailsService(userDetailsService))
 			.formLogin(form -> form
@@ -40,7 +38,7 @@ public class HotelSecurityConfig {
 					.permitAll()
 			)
 			.logout(logout -> logout
-					.deleteCookies("remember-me")
+					.deleteCookies("JSESSIONID")
 					.permitAll());
 		
 		return http.build();
