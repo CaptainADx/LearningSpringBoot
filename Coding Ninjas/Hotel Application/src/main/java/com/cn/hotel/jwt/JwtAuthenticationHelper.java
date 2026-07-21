@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -12,7 +13,7 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtAuthenticationHelper {
-	
+	static final long validity = 60*60*1000; //in Milliseconds
 	
 	private String secret = "mySecretKey";
 	
@@ -46,8 +47,18 @@ public class JwtAuthenticationHelper {
 		
 		return date.before(new Date());
 	}
-	
-	
-	
-	
+
+	public String generateToken(UserDetails userDetails) {
+		Map<String, Object> claims = new HashMap<>();
+		
+		
+		return Jwts.builder()
+				.claims(claims)
+				.subject(userDetails.getUsername())
+				.issuedAt(new Date())
+				.expiration(new Date(System.currentTimeMillis() + validity))
+				.signWith(buildSecretKey(secret))
+				.compact();
+		 
+	}
 }

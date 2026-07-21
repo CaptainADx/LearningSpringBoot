@@ -73,8 +73,7 @@ public class UserService {
             }
         }
         else {
-            role.setRoleName("ROLE_CUSTOMER");
-            roles.add(role);
+            
             user.setRoles(roles);
         }
         userRepo.save(user);
